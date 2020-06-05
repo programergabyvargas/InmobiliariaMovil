@@ -59,7 +59,7 @@ public String mail="carlos@gmail.com", clave="123";
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-                Log.d("Token","no pudo leer");
+                Log.d("Token", String.valueOf(call));
 
             }
         });
