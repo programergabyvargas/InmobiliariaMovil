@@ -29,11 +29,11 @@ public class PerfilViewModel extends ViewModel {
 
         Usuario u = new Usuario(
                 1,
-                "29887502",
-                "Lucero",
-                "Pedro",
-                "2664565685",
-                "pedro@mail.com",
+                "32872636",
+                "Gabriel",
+                "Vargas",
+                "2664678211",
+                "gabrielvargas1807@gmail.com",
                 "123");
 
         setUsuario(u);

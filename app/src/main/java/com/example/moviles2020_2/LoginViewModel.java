@@ -42,7 +42,7 @@ public class LoginViewModel extends ViewModel {
 
             error.setValue("Verifique usuario y contraseña");
         }else{
-            Usuario u = new Usuario(1, "29887502", "Lucero", "Pedro", "2664565685", "pedro@mail.com", "123");
+            Usuario u = new Usuario(1, "32872636", "Vargas", "Gabriel", "2664678211", "gabrielvargas1807@gmail.com", "123");
             usuario.setValue(u);
         }
 

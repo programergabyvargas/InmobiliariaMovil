@@ -2,7 +2,6 @@ package com.example.moviles2020_2.model;
 
 public class Usuario {
 
-
     private int id;
     private String dni;
     private String apellido;
@@ -10,8 +9,6 @@ public class Usuario {
     private String telefono;
     private String mail;
     private String pass;
-
-
 
     public Usuario(int  id, String dni, String apellido, String nombre, String telefono, String mail, String pass) {
         this.id = id;
