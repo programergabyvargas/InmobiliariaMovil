@@ -1,18 +1,18 @@
 package com.example.moviles2020_2.model;
 
 public class Propietario {
-    private String email;
+    private String usuario;
     private String clave;
 
-    public Propietario(String email, String clave) {
-        this.email = email;
+    public Propietario(String usuario, String clave) {
+        this.usuario = usuario;
         this.clave = clave;
     }
     public Propietario() {    }
 
-    public String getEmail() { return email; }
+    public String getEmail() { return usuario; }
 
-    public void setEmail(String email) { this.email = email; }
+    public void setEmail(String email) { this.usuario = email; }
 
     public String getClave() {
         return clave;
