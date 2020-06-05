@@ -21,7 +21,7 @@ import retrofit2.http.Query;
 
 public class ApiClient {
 
-    private static final String PATH="http://192.168.0.126:45456/";
+    private static final String PATH="http://192.168.0.126:45455/api/";
     private static  MyApiInterface myApiInteface;
 
     public static MyApiInterface getMyApiClient(){
@@ -38,10 +38,10 @@ public class ApiClient {
     }
 
     public interface MyApiInterface {
-        @GET("api/Propietarios")
+        @GET("Propietarios")
         Call<List<Propietario>> obtenerPropietarios();
 
-        @POST("api/Propietarios/Login")
+        @POST("Propietarios/Login")
         Call<String> login(@Body Propietario propietario);
     }
 }

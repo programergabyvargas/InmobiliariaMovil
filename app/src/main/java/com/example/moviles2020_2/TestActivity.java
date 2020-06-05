@@ -21,8 +21,8 @@ public String mail="carlos@gmail.com", clave="123";
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
-        ObtenerPropietario();
-       // login();
+       // ObtenerPropietario();
+        login();
     }
 
     public void ObtenerPropietario(){
