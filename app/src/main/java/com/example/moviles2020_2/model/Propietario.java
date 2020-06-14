@@ -24,6 +24,16 @@ public class Propietario {
         this.clave = clave;
     }
 
+    public Propietario( String dni, String apellido, String nombre, String telefono, String mail, String clave) {
+        this.dni = dni;
+        this.apellido = apellido;
+        this.nombre = nombre;
+        this.telefono = telefono;
+        this.email = mail;
+
+        this.clave = clave;
+    }
+
     public String getMail() {
         return email;
     }

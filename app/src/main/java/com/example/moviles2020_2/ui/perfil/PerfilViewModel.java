@@ -22,6 +22,7 @@ import retrofit2.Response;
 public class PerfilViewModel extends AndroidViewModel {
     private Context context;
     private MutableLiveData<Propietario> propietarioMutableLiveData;
+    private Propietario existe;
 
     public PerfilViewModel(@NonNull Application application) {
         super(application);
@@ -39,17 +40,13 @@ public class PerfilViewModel extends AndroidViewModel {
 
     public void setUsuario(Propietario u){
         this.propietarioMutableLiveData.postValue(u);
+        this.existe = u;
     }
 
     public void actualizar(Propietario prop){
-        Log.d("flag", "No entra al response.isSuccesful");
-        Propietario propAux = getPropietario().getValue();
+        prop.setId(existe.getId());
         SharedPreferences sp = context.getSharedPreferences("token", 0);
         String accessToken = sp.getString("token","");
-
-        int id = propAux.getId();
-        prop.setId(id);
-        Log.d("onFailure", "No entra al response.isSuccesful");
         retrofit2.Call<Propietario> propietarioCall = ApiClient.getMyApiClient().actualizar(accessToken, prop );
         propietarioCall.enqueue(new Callback<Propietario>() {
             @Override
@@ -57,6 +54,7 @@ public class PerfilViewModel extends AndroidViewModel {
                 if(response.isSuccessful()) {
                     Propietario propietario = response.body();
                     propietarioMutableLiveData.postValue(propietario);
+                    existe = propietario;
                 }
             }
 
@@ -82,6 +80,7 @@ public class PerfilViewModel extends AndroidViewModel {
                 if(response.isSuccessful()) {
                     Propietario propietario = response.body();
                     propietarioMutableLiveData.postValue(propietario);
+                    existe = propietario;
                 }
             }
 

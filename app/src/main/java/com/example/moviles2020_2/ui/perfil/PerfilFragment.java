@@ -54,7 +54,6 @@ public class PerfilFragment extends Fragment {
             mViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication()).create(PerfilViewModel.class);
 
             mViewModel.obtenerPerfil();
-              Log.d("idPropietario" ,"");
 
         final Observer<Propietario> propietarioObserver = new Observer<Propietario>() {
             @Override
@@ -78,7 +77,6 @@ public class PerfilFragment extends Fragment {
                 if (estado==1){
                     estadoEditable();
                     Propietario u = new Propietario(
-                            1,
                             etdni.getText().toString(),
                             etapellido.getText().toString(),
                             etnombre.getText().toString(),
