@@ -44,7 +44,9 @@ public class Login extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View view) {
-                loginVM.validar(etMail.getText().toString());
+
+                //loginVM.validar(etMail.getText().toString());
+                ingresar(view);
             }
         });
 
@@ -61,14 +63,27 @@ public class Login extends AppCompatActivity {
             public void onChanged(Usuario usuario) {
                 tvError.setText("Iniciando sesion...");
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                intent.putExtra("mail", usuario.getMail());
-                intent.putExtra("nombre", usuario.getNombre());
+                intent.putExtra("mail", usuario.getUsuario());
+                //intent.putExtra("clave", usuario.getClave());
                 startActivity(intent);
             }
         };
         loginVM.getUsuario().observe(this, usuarioObserver);
+
+        final Observer<String> tokenObserver = new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                intent.putExtra("mail", etMail.getText().toString());
+                startActivity(intent);
+            }
+        };
+        loginVM.getToken().observe(this, tokenObserver);
     }
 
+    public void ingresar (android.view.View view){
+        loginVM.ingresar(etMail.getText().toString() ,etPass.getText().toString());
+    }
 }
 
 

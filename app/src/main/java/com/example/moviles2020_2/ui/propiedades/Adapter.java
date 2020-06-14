@@ -74,8 +74,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         public void cargaPropiedad(Propiedad p){
             tvDireccion.setText(p.getDireccion());
             tvAmbientes.setText(p.getAmbientes()+"");
-            //tvTipo.setText(p.getTipo());
-            tvUso.setText(p.getUso());
+            //tvTipo.setText(p.getId()+"");
+            tvUso.setText(p.getSuperficie()+"");
             tvPrecio.setText(p.getPrecio()+"");
             //tvDisponible.setText(p.getDisponible()+"");
         }

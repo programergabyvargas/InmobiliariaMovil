@@ -47,15 +47,15 @@ public class InquilinoViewModel extends ViewModel {
 
     public void obtenerPropiedades(){
         List<Propiedad> lista = new ArrayList<Propiedad>();
-        lista.add(new Propiedad(1, "Sucre 2250", 4, "Depto", "Residencial", 10000, true));
-        lista.add(new Propiedad(2, "Poblet 548", 10, "Depto", "Comercial", 50000, true));
-        lista.add(new Propiedad(3, "Bolivar 815", 1, "Depto", "Comercial", 5000, true));
-        lista.add(new Propiedad(4, "Colon 3213", 3, "Depto", "Residencial", 15000, true));
-        lista.add(new Propiedad(5, "Lince 22 19", 6, "Depto", "Comercial", 30000, true));
-        lista.add(new Propiedad(6, "Italia 11 Sur", 2, "Depto", "Comercial", 10000, true));
-        lista.add(new Propiedad(7, "Ruta 3 Km 11", 8, "Depto", "Residencial", 80000, true));
-        lista.add(new Propiedad(8, "Ruta 20 km 4", 3, "Depto", "Residencial", 15000, true));
-        lista.add(new Propiedad(9, "Av Illia 185", 4, "Depto", "Comercial", 20000, true));
+        lista.add(new Propiedad(1, "Sucre 2250", 4, "Depto", "Residencial", 45,10000, true));
+        lista.add(new Propiedad(2, "Poblet 548", 10, "Depto", "Comercial", 80,50000, true));
+        lista.add(new Propiedad(3, "Bolivar 815", 1, "Depto", "Comercial",67, 5000, true));
+        lista.add(new Propiedad(4, "Colon 3213", 3, "Depto", "Residencial",45, 15000, true));
+        lista.add(new Propiedad(5, "Lince 22 19", 6, "Depto", "Comercial", 85,30000, true));
+        lista.add(new Propiedad(6, "Italia 11 Sur", 2, "Depto", "Comercial", 90,10000, true));
+        lista.add(new Propiedad(7, "Ruta 3 Km 11", 8, "Depto", "Residencial", 85,80000, true));
+        lista.add(new Propiedad(8, "Ruta 20 km 4", 3, "Depto", "Residencial", 59,15000, true));
+        lista.add(new Propiedad(9, "Av Illia 185", 4, "Depto", "Comercial",85, 20000, true));
         setPropiedades(lista);
     }
 

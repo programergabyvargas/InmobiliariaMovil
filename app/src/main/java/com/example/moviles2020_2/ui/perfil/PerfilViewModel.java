@@ -1,41 +1,95 @@
 package com.example.moviles2020_2.ui.perfil;
 
+import android.app.Application;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.util.Log;
+
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.moviles2020_2.model.Propietario;
 import com.example.moviles2020_2.model.Usuario;
+import com.example.moviles2020_2.request.ApiClient;
 
-public class PerfilViewModel extends ViewModel {
-    private MutableLiveData<Usuario> usuario;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
-    public PerfilViewModel() {
-        this.usuario = new MutableLiveData<>();
+public class PerfilViewModel extends AndroidViewModel {
+    private Context context;
+    private MutableLiveData<Propietario> propietarioMutableLiveData;
+
+    public PerfilViewModel(@NonNull Application application) {
+        super(application);
+        context = application.getApplicationContext();
+        this.propietarioMutableLiveData = new MutableLiveData<>();
     }
 
-    public LiveData<Usuario> getUsuario(){
-        if (usuario==null){
-            usuario = new MutableLiveData<>();
+    public LiveData<Propietario> getPropietario(){
+        if (propietarioMutableLiveData==null){
+            propietarioMutableLiveData = new MutableLiveData<>();
         }
-        return usuario;
+        return propietarioMutableLiveData;
     }
 
-    public void setUsuario(Usuario u){
-        this.usuario.setValue(u);
+
+    public void setUsuario(Propietario u){
+        this.propietarioMutableLiveData.postValue(u);
     }
 
-    public void obtenerPerfil(String mail){
+    public void actualizar(Propietario prop){
+        Log.d("flag", "No entra al response.isSuccesful");
+        Propietario propAux = getPropietario().getValue();
+        SharedPreferences sp = context.getSharedPreferences("token", 0);
+        String accessToken = sp.getString("token","");
+
+        int id = propAux.getId();
+        prop.setId(id);
+        Log.d("onFailure", "No entra al response.isSuccesful");
+        retrofit2.Call<Propietario> propietarioCall = ApiClient.getMyApiClient().actualizar(accessToken, prop );
+        propietarioCall.enqueue(new Callback<Propietario>() {
+            @Override
+            public void onResponse(Call<Propietario> call, Response<Propietario> response) {
+                if(response.isSuccessful()) {
+                    Propietario propietario = response.body();
+                    propietarioMutableLiveData.postValue(propietario);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Propietario> call, Throwable t) {
+                Log.d("onFailure", "No entra al response.isSuccesful");
+                Log.d("onFailure", "No entra al response.isSuccesful");
+
+            }
+        });
+    }
+
+
+    public void obtenerPerfil(){
         // aca debo buscar el perfil que inicio session
 
-        Usuario u = new Usuario(
-                1,
-                "32872636",
-                "Gabriel",
-                "Vargas",
-                "2664678211",
-                "gabrielvargas1807@gmail.com",
-                "123");
+        SharedPreferences sp = context.getSharedPreferences("token", 0);
+        String accessToken = sp.getString("token","");
+        retrofit2.Call<Propietario> propietarioCall = ApiClient.getMyApiClient().perfil(accessToken);
+        propietarioCall.enqueue(new Callback<Propietario>() {
+            @Override
+            public void onResponse(Call<Propietario> call, Response<Propietario> response) {
+                if(response.isSuccessful()) {
+                    Propietario propietario = response.body();
+                    propietarioMutableLiveData.postValue(propietario);
+                }
+            }
 
-        setUsuario(u);
+            @Override
+            public void onFailure(Call<Propietario> call, Throwable t) {
+                Log.d("Token", t.getMessage());
+            }
+        });
+
     }
 }

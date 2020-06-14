@@ -1,5 +1,7 @@
 package com.example.moviles2020_2.ui.perfil;
 
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
@@ -19,6 +21,7 @@ import android.widget.EditText;
 
 import com.example.moviles2020_2.LoginViewModel;
 import com.example.moviles2020_2.R;
+import com.example.moviles2020_2.model.Propietario;
 import com.example.moviles2020_2.model.Usuario;
 
 import java.util.IllegalFormatCodePointException;
@@ -50,28 +53,31 @@ public class PerfilFragment extends Fragment {
 
             mViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication()).create(PerfilViewModel.class);
 
-            mViewModel.obtenerPerfil("Aca voy a pasar el parametro de la session");
+            mViewModel.obtenerPerfil();
+              Log.d("idPropietario" ,"");
 
-        final Observer<Usuario> usuarioObserver = new Observer<Usuario>() {
+        final Observer<Propietario> propietarioObserver = new Observer<Propietario>() {
             @Override
-            public void onChanged(Usuario usuario) {
+            public void onChanged(Propietario propietario) {
 
-                etdni.setText(usuario.getDni() + "");
-                etapellido.setText(usuario.getApellido() + "");
-                etnombre.setText(usuario.getNombre() + "");
-                etTelefono.setText(usuario.getTelefono() + "");
-                etMail.setText(usuario.getMail() + "");
-                etPass.setText(usuario.getPass() + "");
+                etdni.setText(propietario.getDni() + "");
+                etapellido.setText(propietario.getApellido() + "");
+                etnombre.setText(propietario.getNombre() + "");
+                etTelefono.setText(propietario.getTelefono() + "");
+                etMail.setText(propietario.getMail() + "");
+                etPass.setText(propietario.getClave() + "");
+                Log.d("salida ", etPass.getText()+"");
+                // setear valores a null
             }
         };
-        mViewModel.getUsuario().observe(getViewLifecycleOwner(), usuarioObserver);
+        mViewModel.getPropietario().observe(getViewLifecycleOwner(), propietarioObserver);
 
         btnToggleEditar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (estado==1){
-                    estadoDos();
-                    Usuario u = new Usuario(
+                    estadoEditable();
+                    Propietario u = new Propietario(
                             1,
                             etdni.getText().toString(),
                             etapellido.getText().toString(),
@@ -81,19 +87,35 @@ public class PerfilFragment extends Fragment {
                             etPass.getText().toString()
                     );
                     mViewModel.setUsuario(u);
+                    //
+                    Log.d("Llamar seteables", "presione editar");
 
                 }else{
-                    estadoUno();
+                    estadoNoEditable();
+                    Log.d("Llamar a actualizar", "presione actualizar");
+                    Propietario a = new Propietario();
+
+                  //  MutableLiveData<Propietario> aux  = (MutableLiveData<Propietario>) mViewModel.getPropietario();
+                   // int id= aux.getValue().getId();
+                   // a.setId(id);
+                    a.setApellido(etapellido.getText().toString());
+                    a.setNombre(etnombre.getText().toString());
+                    a.setDni(etdni.getText().toString());
+                    a.setTelefono(etTelefono.getText().toString());
+                    a.setMail(etMail.getText().toString());
+                    a.setClave(etPass.getText().toString());
+
+                    mViewModel.actualizar(a);
                 }
             }
         });
 
-        estadoUno();
+        estadoNoEditable();
         return view;
     }
 
 
-    public void estadoUno() {
+    public void estadoNoEditable() {
         etdni.setEnabled(false);
         etapellido.setEnabled(false);
         etnombre.setEnabled(false);
@@ -105,7 +127,7 @@ public class PerfilFragment extends Fragment {
         estado = 1;
     }
 
-    public void estadoDos(){
+    public void estadoEditable(){
         etdni.setEnabled(true);
         etapellido.setEnabled(true);
         etnombre.setEnabled(true);
