@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -13,6 +14,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import com.example.moviles2020_2.model.Propiedad;
+import com.example.moviles2020_2.model.Propietario;
 import com.example.moviles2020_2.request.ApiClient;
 
 import java.util.ArrayList;
@@ -24,7 +26,13 @@ import retrofit2.Response;
 
 public class PropiedadViewModel extends AndroidViewModel {
     private MutableLiveData<List<Propiedad>> propiedades;
+    private List<Propiedad> listaPropiedades;
     private MutableLiveData<Propiedad> propiedad;
+    private int idPropiedad;
+
+
+
+    private Propiedad propiedadSelect;
     private Context context;
 
 
@@ -33,6 +41,8 @@ public class PropiedadViewModel extends AndroidViewModel {
         this.propiedades = new MutableLiveData<List<Propiedad>>();
         this.propiedad = new MutableLiveData<>();
         context = application.getApplicationContext();
+        this.listaPropiedades = new ArrayList<Propiedad>();
+
     }
 
     public LiveData<List<Propiedad>> getPropiedades(){
@@ -50,26 +60,33 @@ public class PropiedadViewModel extends AndroidViewModel {
 
     public void setPropiedad(Propiedad p){
         this.propiedad.setValue(p);
+
     }
 
     public void setPropiedades(List<Propiedad> propiedades) {
         this.propiedades.setValue(propiedades);
+
     }
 
+    public void setListaPropiedades(List<Propiedad> propiedades) {
+         this.listaPropiedades= propiedades;
+    }
 
-    // desde aca lleno el fragment main
+    public  List<Propiedad> getListaPropiedades(){
+        return listaPropiedades;
+    }
+
+    public Propiedad getPropiedadSelect() {
+        return propiedadSelect;
+    }
+
+    public void setPropiedadSelect(Propiedad propiedadSelect) {
+        this.propiedadSelect = propiedadSelect;
+    }
+
+        // desde aca lleno el fragment main
     public void obtenerPropiedades(){
         List<Propiedad> lista = new ArrayList<Propiedad>();
-      /*  lista.add(new Propiedad(1, "Sucre 2250", 4, "Depto", "Residencial", 10000, true));
-        lista.add(new Propiedad(2, "Poblet 548", 10, "Depto", "Comercial", 50000, true));
-        lista.add(new Propiedad(3, "Bolivar 815", 1, "Depto", "Comercial", 5000, true));
-        lista.add(new Propiedad(4, "Colon 3213", 3, "Depto", "Residencial", 15000, true));
-        lista.add(new Propiedad(5, "Lince 22 19", 6, "Depto", "Comercial", 30000, true));
-        lista.add(new Propiedad(6, "Italia 11 Sur", 2, "Depto", "Comercial", 10000, true));
-        lista.add(new Propiedad(7, "Ruta 3 Km 11", 8, "Depto", "Residencial", 80000, true));
-        lista.add(new Propiedad(8, "Ruta 20 km 4", 3, "Depto", "Residencial", 15000, true));
-        lista.add(new Propiedad(9, "Av Illia 185", 4, "Depto", "Comercial", 20000, true));
-       */
         SharedPreferences sp = context.getSharedPreferences("token", 0);
         String accessToken = sp.getString("token","");
         retrofit2.Call<List<Propiedad>> listaInmueblesCall = ApiClient.getMyApiClient().listaPropiedades(accessToken);
@@ -79,8 +96,10 @@ public class PropiedadViewModel extends AndroidViewModel {
                 if(response.isSuccessful()) {
                     List<Propiedad> lista = new ArrayList<Propiedad>();
                     lista = response.body();
-                   // propiedades.postValue(lista);
                     setPropiedades(lista);
+                    setListaPropiedades(lista);
+                    //Log.d("flag","lista de propiedades "+getListaPropiedades().get(0).getId());
+                   // Log.d("flag","Tamaño de la lista en obtenerPropiedades : "+ getListaPropiedades().size());
                 }
             }
 
@@ -93,31 +112,39 @@ public class PropiedadViewModel extends AndroidViewModel {
         setPropiedades(lista);
     }
 
-
     //desde aca lleno el fragment detail
     @RequiresApi(api = Build.VERSION_CODES.N)
     public void obtenerPropiedad(int id){
-        List<Propiedad> lista = new ArrayList<Propiedad>();
-        lista.add(new Propiedad(1, "Sucre 2250", 4, "Depto", "Residencial",85, 10000, true));
-        lista.add(new Propiedad(2, "Poblet 548", 10, "Depto", "Comercial",85, 50000, true));
-        lista.add(new Propiedad(3, "Bolivar 815", 1, "Depto", "Comercial", 85,5000, true));
-        lista.add(new Propiedad(4, "Colon 3213", 3, "Depto", "Residencial",85, 15000, true));
-        lista.add(new Propiedad(5, "Lince 22 19", 6, "Depto", "Comercial", 85,30000, true));
-        lista.add(new Propiedad(6, "Italia 11 Sur", 2, "Depto", "Comercial", 85,10000, true));
-        lista.add(new Propiedad(7, "Ruta 3 Km 11", 8, "Depto", "Residencial",85, 80000, true));
-        lista.add(new Propiedad(8, "Ruta 20 km 4", 3, "Depto", "Residencial", 85,15000, true));
-        lista.add(new Propiedad(9, "Av Illia 185", 4, "Depto", "Comercial", 85,20000, true));
+        //List<Propiedad> lista = new ArrayList<Propiedad>();
+        SharedPreferences sp = context.getSharedPreferences("token", 0);
+        String accessToken = sp.getString("token","");
+        retrofit2.Call<Propiedad> propiedadCall = ApiClient.getMyApiClient().obtenerPropiedadPorId(accessToken,id);
+        propiedadCall.enqueue(new Callback<Propiedad>() {
+            @Override
+            public void onResponse(Call<Propiedad> call, Response<Propiedad> response) {
+                if(response.isSuccessful()) {
+                    Propiedad propi= response.body();
+                    setPropiedad(response.body());
+                    setPropiedadSelect(response.body());
 
-       // lista = (List<Propiedad>) propiedades;
+                }
+            }
 
-        Propiedad prop = lista.stream()
+            @Override
+            public void onFailure(Call<Propiedad> call, Throwable t) {
+                Log.d("onFailure", t.getMessage());
+            }
+        });
+
+
+      /*           Propiedad prop = lista.stream()
                 .filter(x -> id == (x.getId()))
                 .findAny()
                 .orElse(null);
 
         if (prop != null){
             setPropiedad(prop);
-        }
+        }*/
 
     }
 
@@ -136,8 +163,72 @@ public class PropiedadViewModel extends AndroidViewModel {
             Log.d("verPropVM", e.getMessage());
             Log.d("verPropVM", e.getCause().toString());
         }
+    }
+
+    public void obtenerPropiedadPorId(int id){
+       // Propiedad prop = new Propiedad();
+        SharedPreferences sp = context.getSharedPreferences("token", 0);
+        String accessToken = sp.getString("token","");
+        retrofit2.Call<Propiedad> InmuebleCall = ApiClient.getMyApiClient().obtenerPropiedadPorId(accessToken,id);
+        InmuebleCall.enqueue(new Callback<Propiedad>() {
+            @Override
+            public void onResponse(Call<Propiedad> call, Response<Propiedad> response) {
+                if(response.isSuccessful()) {
 
 
+                }
+            }
+            @Override
+            public void onFailure(Call<Propiedad> call, Throwable t) {
+                Log.d("onFailure", t.getMessage());
+            }
+        });
+    }
+
+
+    public void actualizarPropiedad(Propiedad propiedadAct){
+
+        propiedadAct.setId(idPropiedad);
+        SharedPreferences sp = context.getSharedPreferences("token", 0);
+        String accessToken = sp.getString("token","");
+        retrofit2.Call<Propiedad> propiedadCall = ApiClient.getMyApiClient().actualizarPropiedad(accessToken, propiedadAct );
+        propiedadCall.enqueue(new Callback<Propiedad>() {
+            @Override
+            public void onResponse(Call<Propiedad> call, Response<Propiedad> response) {
+                if(response.isSuccessful()) {
+                    Propiedad propiedadActualizada = response.body();
+                    propiedad.postValue(propiedadActualizada);
+                    //existe = propietario;
+                    Toast.makeText(context, "Los datos de la propiedad se han actualizado", Toast.LENGTH_LONG).show();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Propiedad> call, Throwable t) {
+                Log.d("onFailure", "No entra al response.isSuccesful");
+                Log.d("onFailure", t.getMessage());
+
+            }
+        });
+    }
+    public void deletePropiedad(int id){
+    SharedPreferences sp = context.getSharedPreferences("token", 0);
+    String accessToken = sp.getString("token","");
+    retrofit2.Call<Integer> deleteInmuebleCall = ApiClient.getMyApiClient().deleteInmueble(accessToken,id);
+        deleteInmuebleCall.enqueue(new Callback<Integer>() {
+            @Override
+            public void onResponse(Call<Integer> call, Response<Integer> response) {
+                if(response.isSuccessful()) {
+                    int result = response.body();
+                    Toast.makeText(context, "Se elimino correctamente el inmueble " +result, Toast.LENGTH_LONG).show();
+                }
+            }
+            @Override
+            public void onFailure(Call<Integer> call, Throwable t) {
+                Log.d("onFailure", t.getMessage());
+            }
+     });
 
     }
 }

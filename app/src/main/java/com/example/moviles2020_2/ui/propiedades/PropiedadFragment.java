@@ -47,6 +47,7 @@ public class PropiedadFragment extends Fragment {
         contenedor.setLayoutManager(layout);
 
         mViewModel.obtenerPropiedades();
+       // mViewModel.deletePropiedad(3025);
 
         listaMutable = new ArrayList<>();
         final Observer<List<Propiedad>> listaObservable = new Observer<List<Propiedad>>() {

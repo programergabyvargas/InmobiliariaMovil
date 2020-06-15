@@ -13,11 +13,15 @@ public class Propiedad implements Serializable {
     private String tipo;
     private  String uso;
     private int superficie;
-    private double precio;
+    private int precio;
     private Boolean disponible;
+    private int idPropietario;
     private Usuario usuario;
 
-    public Propiedad(int id, String direccion, int ambientes, String tipo, String uso,int superficie, double precio, Boolean disponible) {
+    public Propiedad() {
+    }
+
+    public Propiedad(int id, String direccion, int ambientes, String tipo, String uso, int superficie, int precio, Boolean disponible, int idPropietario) {
         this.idInmueble = id;
         this.direccion = direccion;
         this.ambientes = ambientes;
@@ -26,6 +30,7 @@ public class Propiedad implements Serializable {
         this.superficie = superficie;
         this.precio = precio;
         this.disponible = disponible;
+        this.idPropietario = idPropietario;
     }
 
     public int getId() {
@@ -80,7 +85,7 @@ public class Propiedad implements Serializable {
         return precio;
     }
 
-    public void setPrecio(double precio) {
+    public void setPrecio(int precio) {
         this.precio = precio;
     }
 
@@ -92,6 +97,13 @@ public class Propiedad implements Serializable {
         this.disponible = disponible;
     }
 
+    public int getIdPropietario() {
+        return idPropietario;
+    }
+
+    public void setIdPropietario(int idPropietario) {
+        this.idPropietario = idPropietario;
+    }
     public Usuario getUsuario() {
         return usuario;
     }
@@ -104,15 +116,15 @@ public class Propiedad implements Serializable {
     public List<Propiedad> getPropiedades(){
         List<Propiedad> lista;
         lista = new ArrayList<Propiedad>();
-        lista.add(new Propiedad(1, "Sucre 2250", 4, "Depto", "Residencial", 85,10000, true));
-        lista.add(new Propiedad(2, "Poblet 548", 10, "Depto", "Comercial", 90,50000, true));
-        lista.add(new Propiedad(3, "Bolivar 815", 1, "Depto", "Comercial", 75,5000, true));
-        lista.add(new Propiedad(4, "Colon 3213", 3, "Depto", "Residencial", 56,15000, true));
-        lista.add(new Propiedad(5, "Lince 22 19", 6, "Depto", "Comercial", 90,30000, true));
-        lista.add(new Propiedad(6, "Italia 11 Sur", 2, "Depto", "Comercial", 85,10000, true));
-        lista.add(new Propiedad(7, "Ruta 3 Km 11", 8, "Depto", "Residencial",75, 80000, true));
-        lista.add(new Propiedad(8, "Ruta 20 km 4", 3, "Depto", "Residencial",65, 15000, true));
-        lista.add(new Propiedad(9, "Av Illia 185", 4, "Depto", "Comercial",89, 20000, true));
+        lista.add(new Propiedad(1, "Sucre 2250", 4, "Depto", "Residencial", 85,10000, true,5016));
+        lista.add(new Propiedad(2, "Poblet 548", 10, "Depto", "Comercial", 90,50000, true,5016));
+        lista.add(new Propiedad(3, "Bolivar 815", 1, "Depto", "Comercial", 75,5000, true,5016));
+        lista.add(new Propiedad(4, "Colon 3213", 3, "Depto", "Residencial", 56,15000, true,5016));
+        lista.add(new Propiedad(5, "Lince 22 19", 6, "Depto", "Comercial", 90,30000, true,5016));
+        lista.add(new Propiedad(6, "Italia 11 Sur", 2, "Depto", "Comercial", 85,10000, true,5016));
+        lista.add(new Propiedad(7, "Ruta 3 Km 11", 8, "Depto", "Residencial",75, 80000, true,5016));
+        lista.add(new Propiedad(8, "Ruta 20 km 4", 3, "Depto", "Residencial",65, 15000, true,5016));
+        lista.add(new Propiedad(9, "Av Illia 185", 4, "Depto", "Comercial",89, 20000, true,5016));
         return lista;
     }
 }

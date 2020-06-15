@@ -10,14 +10,18 @@ import com.google.gson.GsonBuilder;
 
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public class ApiClient {
 
@@ -52,10 +56,26 @@ public class ApiClient {
         Call<Propietario> perfil(@Header("Authorization") String token);
 
         @PUT("Propietarios")
-        Call<Propietario> actualizar(@Header("Authorization") String token, @Body Propietario popietario);
+        Call<Propietario> actualizarPropietario(@Header("Authorization") String token, @Body Propietario popietario);
 
         @GET("Inmuebles")
         Call<List<Propiedad>> listaPropiedades(@Header("Authorization") String token);
+
+        @GET("Inmuebles/{id}")
+        Call<Propiedad> obtenerPropiedadPorId(@Header("Authorization") String token, @Path("id") int id);
+
+
+        // ABM de Inmuebles
+        @POST("Inmuebles")
+        Call<Propiedad> agregarInmueble(@Header("Authorization") String token, @Body Propiedad propiedad);
+        @PUT("Inmuebles")
+        Call<Propiedad> actualizarPropiedad(@Header("Authorization") String token, @Body Propiedad propiedad);
+
+        @DELETE("Inmuebles/Delete")
+        Call<Integer> deleteInmueble(@Header("Authorization") String token, @Body int id);
+
+
+
 
     }
 }

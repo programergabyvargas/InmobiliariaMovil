@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -23,6 +24,7 @@ public class PerfilViewModel extends AndroidViewModel {
     private Context context;
     private MutableLiveData<Propietario> propietarioMutableLiveData;
     private Propietario existe;
+    private int idPropietario;
 
     public PerfilViewModel(@NonNull Application application) {
         super(application);
@@ -37,6 +39,12 @@ public class PerfilViewModel extends AndroidViewModel {
         return propietarioMutableLiveData;
     }
 
+    public Propietario getExiste(){
+        if (existe==null){
+            existe = new Propietario();
+        }
+        return existe;
+    }
 
     public void setUsuario(Propietario u){
         this.propietarioMutableLiveData.postValue(u);
@@ -44,10 +52,12 @@ public class PerfilViewModel extends AndroidViewModel {
     }
 
     public void actualizar(Propietario prop){
-        prop.setId(existe.getId());
+        int id = getExiste().getId();
+        prop.setId(idPropietario);
+      //  Propietario propAux = getPropietario().getValue();
         SharedPreferences sp = context.getSharedPreferences("token", 0);
         String accessToken = sp.getString("token","");
-        retrofit2.Call<Propietario> propietarioCall = ApiClient.getMyApiClient().actualizar(accessToken, prop );
+        retrofit2.Call<Propietario> propietarioCall = ApiClient.getMyApiClient().actualizarPropietario(accessToken, prop );
         propietarioCall.enqueue(new Callback<Propietario>() {
             @Override
             public void onResponse(Call<Propietario> call, Response<Propietario> response) {
@@ -55,6 +65,8 @@ public class PerfilViewModel extends AndroidViewModel {
                     Propietario propietario = response.body();
                     propietarioMutableLiveData.postValue(propietario);
                     existe = propietario;
+                    Toast.makeText(context, "Sus datos se han actualizado", Toast.LENGTH_LONG).show();
+
                 }
             }
 
@@ -81,6 +93,8 @@ public class PerfilViewModel extends AndroidViewModel {
                     Propietario propietario = response.body();
                     propietarioMutableLiveData.postValue(propietario);
                     existe = propietario;
+                    idPropietario = propietario.getId();
+                    Log.d("Flag", "point parada");
                 }
             }
 

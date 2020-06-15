@@ -44,9 +44,8 @@ public class PropiedadDetailFragment extends Fragment {
         try {
             mViewModel = ViewModelProviders.of(this).get(PropiedadViewModel.class);
             view = inflater.inflate(R.layout.propiedad_detail_fragment, container, false);
-            int propiedad = (int) getArguments().getInt("propiedadId");
+            int propiedad = (int) getArguments().getInt("idPropiedad");
             mViewModel.obtenerPropiedad(propiedad);
-
 
             tvDireccion = view.findViewById(R.id.tvDireccion);
             tvAmbientes = view.findViewById(R.id.tvAmbientes);
@@ -62,10 +61,10 @@ public class PropiedadDetailFragment extends Fragment {
                 public void onChanged(Propiedad propiedad) {
                     try {
 
-                       tvDireccion.setText(propiedad.getDireccion()+"");
-                        tvAmbientes.setText(propiedad.getAmbientes()+"");
-                        tvTipo.setText(propiedad.getTipo()+"");
-                        tvUso.setText(propiedad.getUso()+"");
+                       tvDireccion.setText(propiedad.getDireccion()+"ghfdh");
+                        tvAmbientes.setText(propiedad.getAmbientes()+"vbvbvb");
+                        tvTipo.setText(propiedad.getTipo()+"Departamento");
+                        tvUso.setText(propiedad.getUso()+"Particular");
                         tvPrecio.setText(propiedad.getPrecio()+"");
 
                         if (propiedad.getDisponible()){
@@ -95,7 +94,7 @@ public class PropiedadDetailFragment extends Fragment {
             return view;
         } catch (Exception e) {
             Log.d("verPropiedadDetail", e.getMessage());
-            Log.d("verPropiedadDetail", e.getCause().toString());
+          //  Log.d("verPropiedadDetail", e.getCause().toString());
         }
 
 

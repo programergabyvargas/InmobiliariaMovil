@@ -91,11 +91,9 @@ public class PerfilFragment extends Fragment {
                 }else{
                     estadoNoEditable();
                     Log.d("Llamar a actualizar", "presione actualizar");
+                    //Propietario propAux = mViewModel.getExiste(); Por algun motivo (nose cual) me setea el id=0 cuando trato de acceder desde aca
                     Propietario a = new Propietario();
-
-                  //  MutableLiveData<Propietario> aux  = (MutableLiveData<Propietario>) mViewModel.getPropietario();
-                   // int id= aux.getValue().getId();
-                   // a.setId(id);
+                    //a.setId(propAux.getId());
                     a.setApellido(etapellido.getText().toString());
                     a.setNombre(etnombre.getText().toString());
                     a.setDni(etdni.getText().toString());
