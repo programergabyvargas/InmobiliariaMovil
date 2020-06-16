@@ -16,14 +16,16 @@
         android:layout_height="wrap_content"
         android:text="Dirección:" />
 
-    <TextView
-        android:id="@+id/tvDireccion"
+    <EditText
+        android:id="@+id/etDireccion"
+        style="@style/inputStyle"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-        android:paddingStart="20dp"
-        android:paddingBottom="15dp"
-        android:text="TextView" />
+        android:layout_height="32dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        android:ems="10"
+        android:inputType="textPersonName" />
 
     <TextView
         android:id="@+id/textView17"
@@ -32,14 +34,16 @@
         android:layout_height="wrap_content"
         android:text="Cant. Ambientes:" />
 
-    <TextView
-        android:id="@+id/tvAmbientes"
+    <EditText
+        android:id="@+id/etAmbientes"
+        style="@style/inputStyle"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-        android:paddingStart="20dp"
-        android:paddingBottom="15dp"
-        android:text="TextView" />
+        android:layout_height="32dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        android:ems="10"
+        android:inputType="textPersonName" />
 
     <TextView
         android:id="@+id/textView20"
@@ -48,14 +52,16 @@
         android:layout_height="wrap_content"
         android:text="Tipo:" />
 
-    <TextView
-        android:id="@+id/tvTipo"
+    <EditText
+        android:id="@+id/etTipo"
+        style="@style/inputStyle"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-        android:paddingStart="20dp"
-        android:paddingBottom="15dp"
-        android:text="TextView" />
+        android:layout_height="32dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        android:ems="10"
+        android:inputType="textPersonName" />
 
     <TextView
         android:id="@+id/textView21"
@@ -64,14 +70,16 @@
         android:layout_height="wrap_content"
         android:text="Uso:" />
 
-    <TextView
-        android:id="@+id/tvUso"
+    <EditText
+        android:id="@+id/etUso"
+        style="@style/inputStyle"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-        android:paddingStart="20dp"
-        android:paddingBottom="15dp"
-        android:text="TextView" />
+        android:layout_height="32dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        android:ems="10"
+        android:inputType="textPersonName" />
 
     <TextView
         android:id="@+id/textView22"
@@ -80,14 +88,16 @@
         android:layout_height="wrap_content"
         android:text="Precio($)" />
 
-    <TextView
-        android:id="@+id/tvPrecio"
+    <EditText
+        android:id="@+id/etPrecio"
+        style="@style/inputStyle"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-        android:paddingStart="20dp"
-        android:paddingBottom="15dp"
-        android:text="TextView" />
+        android:layout_height="32dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        android:ems="10"
+        android:inputType="textPersonName" />
 
     <TextView
         android:id="@+id/textView23"
@@ -96,24 +106,28 @@
         android:layout_height="wrap_content"
         android:text="Disponible" />
 
-    <TextView
-        android:id="@+id/tvDisponible"
+    <EditText
+        android:id="@+id/etDisponible"
+        style="@style/inputStyle"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-        android:paddingStart="20dp"
-        android:paddingBottom="15dp"
-        android:text="TextView" />
+        android:layout_height="32dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        android:ems="10"
+        android:inputType="textPersonName" />
 
     <Button
-        android:id="@+id/btnToggleDisponible"
+        android:id="@+id/btnToggleEditar"
         style="@style/buttonStyle"
-        android:layout_gravity="right"
-        android:layout_width="300dp"
+        android:layout_width="121dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="30dp"
 
+        android:layout_marginTop="30dp"
         android:layout_marginBottom="16dp"
-        android:text="Cambiar Disponible" />
+        android:text="Editar
+" />
 
 </LinearLayout>

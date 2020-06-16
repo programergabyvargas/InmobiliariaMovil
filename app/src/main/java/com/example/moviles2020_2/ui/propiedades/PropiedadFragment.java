@@ -32,6 +32,8 @@ public class PropiedadFragment extends Fragment {
     private PropiedadViewModel mViewModel;
     List<Propiedad> listaMutable;
     RecyclerView contenedor;
+    public List<Propiedad> listaPropiedades;
+
     public static PropiedadFragment newInstance() {
         return new PropiedadFragment();
     }
@@ -47,13 +49,18 @@ public class PropiedadFragment extends Fragment {
         contenedor.setLayoutManager(layout);
 
         mViewModel.obtenerPropiedades();
-       // mViewModel.deletePropiedad(3025);
 
         listaMutable = new ArrayList<>();
         final Observer<List<Propiedad>> listaObservable = new Observer<List<Propiedad>>() {
             @Override
             public void onChanged(List<Propiedad> propiedads) {
                 contenedor.setAdapter(new Adapter(propiedads));
+                listaPropiedades = propiedads;
+
+                if (!listaPropiedades.isEmpty()) {
+                   // Log.d("flag", "lista de propiedades " + listaPropiedades.get(0).getId());
+                  //  Toast.makeText(getContext(), "Flag Propiedad" + listaPropiedades.get(0).getId(), Toast.LENGTH_LONG).show();
+                }
             }
         };
         mViewModel.getPropiedades().observe(getViewLifecycleOwner(), listaObservable);

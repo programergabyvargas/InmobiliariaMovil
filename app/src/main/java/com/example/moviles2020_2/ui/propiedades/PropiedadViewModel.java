@@ -116,6 +116,9 @@ public class PropiedadViewModel extends AndroidViewModel {
     @RequiresApi(api = Build.VERSION_CODES.N)
     public void obtenerPropiedad(int id){
         //List<Propiedad> lista = new ArrayList<Propiedad>();
+        /*if(!listaPropiedades.isEmpty()) {
+            Toast.makeText(context, listaPropiedades.get(0).getId(), Toast.LENGTH_SHORT).show();
+        }else{Toast.makeText(context, "lista vacia", Toast.LENGTH_SHORT).show();}*/
         SharedPreferences sp = context.getSharedPreferences("token", 0);
         String accessToken = sp.getString("token","");
         retrofit2.Call<Propiedad> propiedadCall = ApiClient.getMyApiClient().obtenerPropiedadPorId(accessToken,id);

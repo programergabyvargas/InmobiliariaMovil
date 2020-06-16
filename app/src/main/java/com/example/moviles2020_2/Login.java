@@ -70,9 +70,11 @@ public class Login extends AppCompatActivity {
         };
         loginVM.getUsuario().observe(this, usuarioObserver);
 
+        //uso un observador para el token
         final Observer<String> tokenObserver = new Observer<String>() {
             @Override
             public void onChanged(String s) {
+                tvError.setText("Iniciando sesion...");
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 intent.putExtra("mail", etMail.getText().toString());
                 startActivity(intent);

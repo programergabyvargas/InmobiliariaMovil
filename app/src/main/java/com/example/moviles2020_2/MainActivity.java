@@ -6,10 +6,12 @@ import android.view.Menu;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.moviles2020_2.ui.propiedades.PropiedadFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -23,7 +25,6 @@ public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
 
     private TextView sessionNombre;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +63,9 @@ public class MainActivity extends AppCompatActivity {
             sessionNombre = findViewById(R.id.tvSessionMail);
             sessionNombre.setText(bundle.getString("mail"));
 
+            //menu propiedades
+
+            getMenuInflater().inflate(R.menu.menu_propiedades, menu);
         }
         return true;
     }
@@ -72,4 +76,6 @@ public class MainActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
+
+
 }

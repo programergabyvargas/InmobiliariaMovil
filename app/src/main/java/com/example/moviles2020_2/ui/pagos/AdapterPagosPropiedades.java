@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -47,29 +48,29 @@ public class AdapterPagosPropiedades extends RecyclerView.Adapter<AdapterPagosPr
 
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView tvDireccion, tvAmbientes, tvTipo, tvUso, tvPrecio, tvDisponible;
+        EditText etDireccion, etAmbientes, etTipo, etUso, tvPrecio, tvDisponible;
         Button btnBuscaPropiedad;
         List<Propiedad> lista;
 
 
         public ViewHolder(@NonNull View itemView, List<Propiedad> lista) {
             super(itemView);
-            tvDireccion = itemView.findViewById(R.id.tvDireccion);
-            tvAmbientes = itemView.findViewById(R.id.tvAmbientes);
-            tvTipo = itemView.findViewById(R.id.tvTipo);
-            tvUso = itemView.findViewById(R.id.tvUso);
-            tvPrecio = itemView.findViewById(R.id.tvPrecio);
-            tvDisponible = itemView.findViewById(R.id.tvDisponible);
+            etDireccion = itemView.findViewById(R.id.etDireccion);
+            etAmbientes = itemView.findViewById(R.id.etAmbientes);
+            etTipo = itemView.findViewById(R.id.etTipo);
+            etUso = itemView.findViewById(R.id.etUso);
+            tvPrecio = itemView.findViewById(R.id.etPrecio);
+            tvDisponible = itemView.findViewById(R.id.etDisponible);
             btnBuscaPropiedad = itemView.findViewById(R.id.btnBuscaPropiedad);
             btnBuscaPropiedad.setOnClickListener(this);
             this.lista = lista;
         }
 
         public void cargaPropiedad(Propiedad p){
-            tvDireccion.setText(p.getDireccion());
-            tvAmbientes.setText(p.getAmbientes()+"");
+            etDireccion.setText(p.getDireccion());
+            etAmbientes.setText(p.getAmbientes()+"");
             //tvTipo.setText(p.getTipo());
-            tvUso.setText(p.getUso());
+            etUso.setText(p.getUso());
             tvPrecio.setText(p.getPrecio()+"");
             //tvDisponible.setText(p.getDisponible()+"");
             btnBuscaPropiedad.setText("Ver Pagos");

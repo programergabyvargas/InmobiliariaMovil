@@ -52,14 +52,14 @@
         android:layout_height="53dp" />
 
     <EditText
-        style="@style/inputStyle"
         android:id="@+id/etPassword"
+        style="@style/inputStyle"
         android:layout_width="340dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="Contraseña"
-        android:inputType="textEmailAddress"
+        android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.507"
         app:layout_constraintStart_toStartOf="parent"

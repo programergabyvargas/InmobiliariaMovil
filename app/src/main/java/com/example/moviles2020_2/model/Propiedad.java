@@ -13,7 +13,7 @@ public class Propiedad implements Serializable {
     private String tipo;
     private  String uso;
     private int superficie;
-    private int precio;
+    private double precio;
     private Boolean disponible;
     private int idPropietario;
     private Usuario usuario;
@@ -21,8 +21,19 @@ public class Propiedad implements Serializable {
     public Propiedad() {
     }
 
-    public Propiedad(int id, String direccion, int ambientes, String tipo, String uso, int superficie, int precio, Boolean disponible, int idPropietario) {
+    public Propiedad(int id, String direccion, int ambientes, String tipo, String uso, int superficie, double precio, Boolean disponible, int idPropietario) {
         this.idInmueble = id;
+        this.direccion = direccion;
+        this.ambientes = ambientes;
+        this.tipo = tipo;
+        this.uso = uso;
+        this.superficie = superficie;
+        this.precio = precio;
+        this.disponible = disponible;
+        this.idPropietario = idPropietario;
+    }
+
+    public Propiedad( String direccion, int ambientes, String tipo, String uso, double precio, Boolean disponible) {
         this.direccion = direccion;
         this.ambientes = ambientes;
         this.tipo = tipo;
