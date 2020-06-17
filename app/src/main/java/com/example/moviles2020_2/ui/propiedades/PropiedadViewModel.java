@@ -28,6 +28,9 @@ public class PropiedadViewModel extends AndroidViewModel {
     private MutableLiveData<List<Propiedad>> propiedades;
     private List<Propiedad> listaPropiedades;
     private MutableLiveData<Propiedad> propiedad;
+
+
+
     private int idPropiedad;
 
 
@@ -83,7 +86,13 @@ public class PropiedadViewModel extends AndroidViewModel {
     public void setPropiedadSelect(Propiedad propiedadSelect) {
         this.propiedadSelect = propiedadSelect;
     }
+    public int getIdPropiedad() {
+        return idPropiedad;
+    }
 
+    public void setIdPropiedad(int idPropiedad) {
+        this.idPropiedad = idPropiedad;
+    }
         // desde aca lleno el fragment main
     public void obtenerPropiedades(){
         List<Propiedad> lista = new ArrayList<Propiedad>();
@@ -129,6 +138,7 @@ public class PropiedadViewModel extends AndroidViewModel {
                     Propiedad propi= response.body();
                     setPropiedad(response.body());
                     setPropiedadSelect(response.body());
+                    idPropiedad = propi.getId();
 
                 }
             }
@@ -184,6 +194,7 @@ public class PropiedadViewModel extends AndroidViewModel {
             @Override
             public void onFailure(Call<Propiedad> call, Throwable t) {
                 Log.d("onFailure", t.getMessage());
+
             }
         });
     }
@@ -194,7 +205,7 @@ public class PropiedadViewModel extends AndroidViewModel {
         propiedadAct.setId(idPropiedad);
         SharedPreferences sp = context.getSharedPreferences("token", 0);
         String accessToken = sp.getString("token","");
-        retrofit2.Call<Propiedad> propiedadCall = ApiClient.getMyApiClient().actualizarPropiedad(accessToken, propiedadAct );
+        retrofit2.Call<Propiedad> propiedadCall = ApiClient.getMyApiClient().actualizarPropiedad(accessToken, propiedadAct.getId(), propiedadAct);
         propiedadCall.enqueue(new Callback<Propiedad>() {
             @Override
             public void onResponse(Call<Propiedad> call, Response<Propiedad> response) {
@@ -203,18 +214,17 @@ public class PropiedadViewModel extends AndroidViewModel {
                     propiedad.postValue(propiedadActualizada);
                     //existe = propietario;
                     Toast.makeText(context, "Los datos de la propiedad se han actualizado", Toast.LENGTH_LONG).show();
-
                 }
             }
-
             @Override
             public void onFailure(Call<Propiedad> call, Throwable t) {
-                Log.d("onFailure", "No entra al response.isSuccesful");
                 Log.d("onFailure", t.getMessage());
-
+                Toast.makeText(context, "No se realizar la actualizacion de datos", Toast.LENGTH_LONG).show();
             }
         });
     }
+
+
     public void deletePropiedad(int id){
     SharedPreferences sp = context.getSharedPreferences("token", 0);
     String accessToken = sp.getString("token","");

@@ -68,8 +68,9 @@ public class ApiClient {
         // ABM de Inmuebles
         @POST("Inmuebles")
         Call<Propiedad> agregarInmueble(@Header("Authorization") String token, @Body Propiedad propiedad);
-        @PUT("Inmuebles")
-        Call<Propiedad> actualizarPropiedad(@Header("Authorization") String token, @Body Propiedad propiedad);
+
+        @PUT("Inmuebles/{id}")
+        Call<Propiedad> actualizarPropiedad(@Header("Authorization") String token, @Path("id") int id, @Body Propiedad propiedad);
 
         @DELETE("Inmuebles/Delete")
         Call<Integer> deleteInmueble(@Header("Authorization") String token, @Body int id);

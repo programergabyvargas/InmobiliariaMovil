@@ -16,7 +16,7 @@ public class Propiedad implements Serializable {
     private double precio;
     private Boolean disponible;
     private int idPropietario;
-    private Usuario usuario;
+   // private Usuario usuario;
 
     public Propiedad() {
     }
@@ -115,14 +115,15 @@ public class Propiedad implements Serializable {
     public void setIdPropietario(int idPropietario) {
         this.idPropietario = idPropietario;
     }
-    public Usuario getUsuario() {
+
+   /* public Usuario getUsuario() {
         return usuario;
     }
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
-
+*/
 
     public List<Propiedad> getPropiedades(){
         List<Propiedad> lista;
