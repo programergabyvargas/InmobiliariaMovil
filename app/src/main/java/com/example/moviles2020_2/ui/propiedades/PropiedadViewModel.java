@@ -209,6 +209,10 @@ public class PropiedadViewModel extends AndroidViewModel {
         propiedadCall.enqueue(new Callback<Propiedad>() {
             @Override
             public void onResponse(Call<Propiedad> call, Response<Propiedad> response) {
+                Log.d("call .isCancel ", call.isCanceled()+"");
+                Log.d("response ", response.message());
+
+
                 if(response.isSuccessful()) {
                     Propiedad propiedadActualizada = response.body();
                     propiedad.postValue(propiedadActualizada);

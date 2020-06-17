@@ -90,7 +90,7 @@ public class PropiedadDetailFragment extends Fragment {
                                 Integer.parseInt(etAmbientes.getText().toString()),
                                 etTipo.getText().toString(),
                                 etUso.getText().toString(),
-                                Double.parseDouble(etPrecio.getText().toString()),
+                                Integer.parseInt(etPrecio.getText().toString()),
                                 Boolean.valueOf(etDisponible.getText().toString())                        );
                         mViewModel.setPropiedad(u);
                         //
@@ -106,7 +106,7 @@ public class PropiedadDetailFragment extends Fragment {
                         a.setAmbientes(Integer.parseInt(etAmbientes.getText().toString()));
                         a.setTipo(etTipo.getText().toString());
                         a.setUso(etUso.getText().toString());
-                        a.setPrecio((int) Double.parseDouble(etPrecio.getText().toString()));
+                        a.setPrecio(Integer.parseInt(etPrecio.getText().toString()));
                         a.setDisponible(Boolean.valueOf(etDisponible.getText().toString()));
 
                         mViewModel.actualizarPropiedad(a);
