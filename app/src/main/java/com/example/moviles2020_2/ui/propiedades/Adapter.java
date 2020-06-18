@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,9 +48,14 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         return listaPropiedad.size();
     }
 
+
+
     //clase Interna
+
+
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView tvDireccion, tvAmbientes, tvTipo, tvUso, tvPrecio, tvDisponible;
+        TextView tvDireccion, tvAmbientes, tvTipo, tvUso, tvPrecio;
+        CheckBox cBDisponible;
         Button btnBuscaPropiedad;
         List<Propiedad> lista;
 
@@ -58,22 +64,26 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
             super(itemView);
             tvDireccion = itemView.findViewById(R.id.tvDireccion);
             tvAmbientes = itemView.findViewById(R.id.tvAmbientes);
-            tvTipo = itemView.findViewById(R.id.etTipo);
+           // tvTipo = itemView.findViewById(R.id.tvTipo);
             tvUso = itemView.findViewById(R.id.tvUso);
             tvPrecio = itemView.findViewById(R.id.tvPrecio);
-            tvDisponible = itemView.findViewById(R.id.etDisponible);
+            cBDisponible = itemView.findViewById(R.id.cBDisponible);
             btnBuscaPropiedad = itemView.findViewById(R.id.btnBuscaPropiedad);
             btnBuscaPropiedad.setOnClickListener(this);
-            //this.lista = lista;
+            this.lista = lista;
         }
 
         public void cargaPropiedad(Propiedad p){
             tvDireccion.setText(p.getDireccion());
             tvAmbientes.setText(p.getAmbientes()+"");
             //tvTipo.setText(p.getId()+"");
-            tvUso.setText(p.getSuperficie()+"");
+            tvUso.setText(p.getTipo()+"");
             tvPrecio.setText(p.getPrecio()+"");
-            //tvDisponible.setText(p.getDisponible()+"");
+          /*  if (p.getDisponible()){
+                cBDisponible.setChecked(true);
+            }else {
+                cBDisponible.setChecked(false);
+            }*/
         }
 
         @Override
@@ -82,9 +92,15 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
             Propiedad propiedad = listaPropiedad.get(position);
 
             //Toast.makeText(btnBuscaPropiedad.getContext(), propiedad.getDireccion(), Toast.LENGTH_SHORT).show();
+
+
             Bundle bundle = new Bundle();
             bundle.putInt("propiedadId", propiedad.getId());
             Navigation.findNavController(v).navigate(R.id.propiedadDetailFragment, bundle);
+
+
+
         }
     }
+
 }

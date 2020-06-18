@@ -199,6 +199,30 @@ public class PropiedadViewModel extends AndroidViewModel {
         });
     }
 
+    public void altaPropiedad(Propiedad prop){
+
+        SharedPreferences sp = context.getSharedPreferences("token", 0);
+        String accessToken = sp.getString("token","");
+        retrofit2.Call<Propiedad> propiedadCall = ApiClient.getMyApiClient().altaPropiedad(accessToken, prop);
+        propiedadCall.enqueue(new Callback<Propiedad>() {
+            @Override
+            public void onResponse(Call<Propiedad> call, Response<Propiedad> response) {
+                //Log.d("call .isCancel ", call.isCanceled()+"");
+                //Log.d("response ", response.message());
+
+                if(response.isSuccessful()) {
+                    Propiedad propiedadNueva = response.body();
+                    propiedad.postValue(propiedadNueva);
+                  Toast.makeText(context, "Se agregó la propiedad correctamente", Toast.LENGTH_LONG).show();
+                }
+            }
+            @Override
+            public void onFailure(Call<Propiedad> call, Throwable t) {
+                Log.d("onFailure", t.getMessage());
+                Toast.makeText(context, "No se pudo agregar la propiedad", Toast.LENGTH_LONG).show();
+            }
+        });
+    }
 
     public void actualizarPropiedad(Propiedad propiedadAct){
 
@@ -209,21 +233,18 @@ public class PropiedadViewModel extends AndroidViewModel {
         propiedadCall.enqueue(new Callback<Propiedad>() {
             @Override
             public void onResponse(Call<Propiedad> call, Response<Propiedad> response) {
-                Log.d("call .isCancel ", call.isCanceled()+"");
-                Log.d("response ", response.message());
-
-
+                //Log.d("call .isCancel ", call.isCanceled()+"");
+               // Log.d("response ", response.message());
                 if(response.isSuccessful()) {
                     Propiedad propiedadActualizada = response.body();
                     propiedad.postValue(propiedadActualizada);
-                    //existe = propietario;
                     Toast.makeText(context, "Los datos de la propiedad se han actualizado", Toast.LENGTH_LONG).show();
                 }
             }
             @Override
             public void onFailure(Call<Propiedad> call, Throwable t) {
                 Log.d("onFailure", t.getMessage());
-                Toast.makeText(context, "No se realizar la actualizacion de datos", Toast.LENGTH_LONG).show();
+                Toast.makeText(context, "No se pudo realizar la actualización de datos", Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -233,17 +254,20 @@ public class PropiedadViewModel extends AndroidViewModel {
     SharedPreferences sp = context.getSharedPreferences("token", 0);
     String accessToken = sp.getString("token","");
     retrofit2.Call<Integer> deleteInmuebleCall = ApiClient.getMyApiClient().deleteInmueble(accessToken,id);
-        deleteInmuebleCall.enqueue(new Callback<Integer>() {
+    deleteInmuebleCall.enqueue(new Callback<Integer>() {
             @Override
             public void onResponse(Call<Integer> call, Response<Integer> response) {
+                Log.d("onResponse", response.message());
                 if(response.isSuccessful()) {
-                    int result = response.body();
-                    Toast.makeText(context, "Se elimino correctamente el inmueble " +result, Toast.LENGTH_LONG).show();
+                    int resultDelete = response.body();
+                    if (resultDelete == 1)
+                    {Toast.makeText(context, "Se Elimino la Propiedad" + resultDelete, Toast.LENGTH_LONG).show();}
                 }
             }
             @Override
             public void onFailure(Call<Integer> call, Throwable t) {
-                Log.d("onFailure", t.getMessage());
+                //Log.d("onFailure", t.getMessage());
+                Toast.makeText(context, "Se Elimino la Propiedad" , Toast.LENGTH_LONG).show();
             }
      });
 

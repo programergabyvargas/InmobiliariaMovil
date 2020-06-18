@@ -56,10 +56,10 @@ public class AdapterInquilino extends RecyclerView.Adapter<AdapterInquilino.View
             super(itemView);
             tvDireccion = itemView.findViewById(R.id.tvDireccion);
             tvAmbientes = itemView.findViewById(R.id.tvAmbientes);
-            tvTipo = itemView.findViewById(R.id.etTipo);
+          //  tvTipo = itemView.findViewById(R.id.tvTipo);
             tvUso = itemView.findViewById(R.id.tvUso);
             tvPrecio = itemView.findViewById(R.id.tvPrecio);
-            tvDisponible = itemView.findViewById(R.id.etDisponible);
+            //tvDisponible = itemView.findViewById(R.id.tvDisponible);
             btnBuscaPropiedad = itemView.findViewById(R.id.btnBuscaPropiedad);
             btnBuscaPropiedad.setOnClickListener(this);
             this.lista = lista;

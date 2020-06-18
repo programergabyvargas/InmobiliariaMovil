@@ -56,7 +56,7 @@ public class AdapterContrato extends RecyclerView.Adapter<AdapterContrato.ViewHo
             etTipo = itemView.findViewById(R.id.etTipo);
             etUso = itemView.findViewById(R.id.etUso);
             etPrecio = itemView.findViewById(R.id.etPrecio);
-            etDisponible = itemView.findViewById(R.id.etDisponible);
+           // etDisponible = itemView.findViewById(R.id.etDisponible);
             btnBuscaPropiedad = itemView.findViewById(R.id.btnBuscaPropiedad);
             btnBuscaPropiedad.setOnClickListener(this);
             this.lista = lista;

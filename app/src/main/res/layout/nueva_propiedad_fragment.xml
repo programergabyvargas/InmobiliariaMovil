@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="20dp"
-    tools:context=".ui.propiedades.PropiedadDetailFragment">
+    tools:context=".ui.propiedades.NuevaPropiedadFragment">
 
     <TextView
         android:id="@+id/textView6"
@@ -108,6 +108,7 @@
 
     <CheckBox
         android:id="@+id/cBDisponible"
+
         android:layout_width="match_parent"
         android:layout_height="32dp"
         android:layout_marginLeft="16dp"
@@ -117,7 +118,7 @@
         />
 
     <Button
-        android:id="@+id/btnToggleEditar"
+        android:id="@+id/btnToggleGuardar"
         style="@style/buttonStyle"
         android:layout_width="match_parent"
         android:layout_height="32dp"
@@ -125,17 +126,6 @@
         android:layout_marginRight="16dp"
         android:layout_marginBottom="16dp"
         android:ems="10"
-        android:text="Editar" />
-
-    <Button
-        android:id="@+id/btnToggleEliminar"
-        style="@style/buttonStyle"
-        android:layout_width="match_parent"
-        android:layout_height="32dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="16dp"
-        android:ems="10"
-        android:text="Eliminar" />
+        android:text="Guardar" />
 
 </LinearLayout>

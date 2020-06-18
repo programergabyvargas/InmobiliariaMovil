@@ -60,7 +60,7 @@ public class AdapterPagosPropiedades extends RecyclerView.Adapter<AdapterPagosPr
             etTipo = itemView.findViewById(R.id.etTipo);
             etUso = itemView.findViewById(R.id.etUso);
             tvPrecio = itemView.findViewById(R.id.etPrecio);
-            tvDisponible = itemView.findViewById(R.id.etDisponible);
+          //  tvDisponible = itemView.findViewById(R.id.etDisponible);
             btnBuscaPropiedad = itemView.findViewById(R.id.btnBuscaPropiedad);
             btnBuscaPropiedad.setOnClickListener(this);
             this.lista = lista;

@@ -62,10 +62,9 @@ public class MainActivity extends AppCompatActivity {
             sessionNombre.setText(bundle.getString("nombre"));
             sessionNombre = findViewById(R.id.tvSessionMail);
             sessionNombre.setText(bundle.getString("mail"));
-
             //menu propiedades
+           // getMenuInflater().inflate(R.menu.menu_propiedades, menu);
 
-            getMenuInflater().inflate(R.menu.menu_propiedades, menu);
         }
         return true;
     }

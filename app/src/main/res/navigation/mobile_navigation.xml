@@ -123,5 +123,14 @@
             android:id="@+id/action_salirFragment_to_nav_home"
             app:destination="@id/nav_home" />
     </fragment>
+    <fragment
+        android:id="@+id/nuevaPropiedadFragment"
+        android:name="com.example.moviles2020_2.ui.propiedades.NuevaPropiedadFragment"
+        android:label="nueva_propiedad_fragment"
+        tools:layout="@layout/nueva_propiedad_fragment" >
+        <action
+            android:id="@+id/action_nuevaPropiedadFragment_to_nav_propiedad"
+            app:destination="@id/nav_propiedad" />
+    </fragment>
 
 </navigation>

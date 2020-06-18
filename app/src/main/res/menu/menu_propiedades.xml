@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context = ".MainActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".PropiedadFragment">
 
     <item android:id="@+id/crear"
-    android:title="Crear"/>
-    <item android:id="@+id/modificar"
-        android:title="Modificar"/>
+    android:title="Crear Propiedad"
+        android:icon="@android:drawable/ic_input_add"
+        app:showAsAction="ifRoom" />
+
 
 </menu>
